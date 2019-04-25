@@ -7,6 +7,7 @@ import { getUserInfo } from '../../../actions/usersInformationAction.js';
 import './BusinessSignup.scss';
 
 const API_SERVER = process.env.API_SERVER;
+const GOOGLE = process.env.GOOGLE;
 
 class SignupBusiness extends Component {
   constructor() {
@@ -40,7 +41,7 @@ class SignupBusiness extends Component {
       {
         params: {
           address: locations,
-          key: 'google',
+          key: GOOGLE,
         },
       }
     );
@@ -75,7 +76,7 @@ class SignupBusiness extends Component {
     };
     try {
       const { data } = await axios.post(
-        `http://localhost:${API_SERVER}/api/auth/signup`,
+        `${process.env.DOMAIN}/api/auth/signup`,
         body
       );
 

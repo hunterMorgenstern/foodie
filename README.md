@@ -6,13 +6,14 @@ foodie is an application that allows users to group their food delivery into big
 
 - `brew install postgresql`
 - `brew install redis`
+- `install mongodb`
 
 ## Setup environment
 
 - `yarn`
 - `yarn buildEnv`
 
-### Start the api servers
+### Start the api - ui/socket servers
 
 - `yarn start:rest-server`
 - `yarn start:socket-server`
@@ -38,15 +39,15 @@ foodie is an application that allows users to group their food delivery into big
 - `yarn db:setup:redis`
 - `redis-cli`
 
-### Start the ui servers
+<!-- ### Start the ui servers -->
 
-- `yarn start:server`
+<!-- - `yarn start:server` -->
 
 ### webpack bundle
 
 - `yarn build`
 
-### localhost:1337
+### localhost:3000
 
 ### links
 

@@ -11,25 +11,33 @@ import chatRouter from '../components/chat/chatRouter';
 import paymentsRouter from '../components/stripe/paymentsRouter';
 import ordersRouter from '../components/orders/ordersRouter';
 
+import { resolve } from 'path';
+
 const router = express.Router();
 
-router.use('/auth', authRouter);
+router
+  .route('/')
+  .get((req, res) =>
+    res.sendFile(resolve(__dirname, '../../../../client/public/index.html'))
+  );
 
-router.use('/users', searchRestaurantsRouter);
+router.use('/api/auth', authRouter);
 
-router.use('/menu', menuRouter);
+router.use('/api/users', searchRestaurantsRouter);
 
-router.use('/cart', cartRouter);
+router.use('/api/menu', menuRouter);
 
-router.use('/business', businessRouter);
+router.use('/api/cart', cartRouter);
 
-router.use('/pool', poolRouter);
+router.use('/api/business', businessRouter);
 
-router.use('/stripe', paymentsRouter);
+router.use('/api/pool', poolRouter);
 
-router.use('/reviews', reviewsRouter);
+router.use('/api/stripe', paymentsRouter);
 
-router.use('/chat', chatRouter);
-router.use('/orders', ordersRouter);
+router.use('/api/reviews', reviewsRouter);
+
+router.use('/api/chat', chatRouter);
+router.use('/api/orders', ordersRouter);
 
 export default router;

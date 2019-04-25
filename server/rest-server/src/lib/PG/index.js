@@ -1,18 +1,16 @@
-require('dotenv').config();
-
 import db from '../../config/databases/pg';
-import {
-  success,
-  error
-} from '../../../../lib/log';
+import { success, error } from '../../../../lib/log';
 
-const database = process.env.NODE_ENV === 'production' ? process.env.AWS_DATABASE : process.env.LOCAL_DATABASE;
+const database =
+  process.env.NODE_ENV === 'production'
+    ? process.env.AWS_DATABASE
+    : process.env.LOCAL_DATABASE;
 
 /**
  * SQL statements for syncing and dropping tables
- * 
+ *
  * Used in npm script `db:setup:rest-server`
- * 
+ *
  * Database
  * Users
  * Challenges
@@ -26,9 +24,7 @@ const database = process.env.NODE_ENV === 'production' ? process.env.AWS_DATABAS
 // database SQL statements to create, drop, and use a database
 export const createDatabase = async () => {
   try {
-    await db.query(
-      `CREATE DATABASE ${database}`
-    );
+    await db.query(`CREATE DATABASE ${database}`);
     success('successfully created database ', database);
   } catch (err) {
     error('error creating database ', err);
@@ -37,9 +33,7 @@ export const createDatabase = async () => {
 
 export const dropDatabase = async () => {
   try {
-    await db.query(
-      `DROP DATABASE IF EXISTS ${database}`
-    );
+    await db.query(`DROP DATABASE IF EXISTS ${database}`);
     success('successfully dropped database ', database);
   } catch (err) {
     error('error dropping database ', err);
@@ -48,9 +42,7 @@ export const dropDatabase = async () => {
 
 export const useDatabase = async () => {
   try {
-    await db.query(
-      `USE IF EXISTS ${database}`
-    );
+    await db.query(`USE IF EXISTS ${database}`);
     success('successfully using database ', database);
   } catch (err) {
     error('error using database ', err);
@@ -61,7 +53,7 @@ export const useDatabase = async () => {
 
 export const createUsersTable = async () => {
   try {
-    await db.query( 
+    await db.query(
       `
       CREATE TABLE IF NOT EXISTS users
       (
@@ -81,15 +73,13 @@ export const createUsersTable = async () => {
     );
     success('successfully created Users table');
   } catch (err) {
-    error('error creating Users table ', err)
+    error('error creating Users table ', err);
   }
 };
 
 export const dropUsersTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS users`
-    );
+    await db.query(`DROP TABLE IF EXISTS users`);
     success('successfully dropped Users table');
   } catch (err) {
     error('error dropping Users table ', err);
@@ -135,9 +125,7 @@ export const createBusinessesTable = async () => {
 
 export const dropBusinessesTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS businesses`
-    );
+    await db.query(`DROP TABLE IF EXISTS businesses`);
     success('successfully dropped Businesses table');
   } catch (err) {
     error('error dropping Businessess table ', err);
@@ -166,7 +154,7 @@ export const createDelivery_UsersTable = async () => {
       )
       `
     );
-    success('succesfully created Delivery_Users table')
+    success('succesfully created Delivery_Users table');
   } catch (err) {
     error('error creating Delivery_Users table ', err);
   }
@@ -174,9 +162,7 @@ export const createDelivery_UsersTable = async () => {
 
 export const dropDelivery_UsersTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS delivery_users`
-    );
+    await db.query(`DROP TABLE IF EXISTS delivery_users`);
   } catch (err) {
     error('error dropping Delivery_Users table ', err);
   }
@@ -211,9 +197,7 @@ export const createReviewsTable = async () => {
 
 export const dropReviewsTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS reviews`
-    );
+    await db.query(`DROP TABLE IF EXISTS reviews`);
     success('successfully dropped Reviews table');
   } catch (err) {
     error('error dropping Reviews table ', err);
@@ -250,9 +234,7 @@ export const createReviews_UsersTable = async () => {
 
 export const dropReviews_UsersTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS reviews_users`
-    );
+    await db.query(`DROP TABLE IF EXISTS reviews_users`);
     success('successfully dropped Reviews_Users table');
   } catch (err) {
     error('error dropping Reviews_Users table ', err);
@@ -288,9 +270,7 @@ export const createMenusTable = async () => {
 
 export const dropMenusTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS menus`
-    );
+    await db.query(`DROP TABLE IF EXISTS menus`);
     success('successfully dropped Menus table');
   } catch (err) {
     error('error dropping Menus table ', err);
@@ -319,7 +299,7 @@ export const createFriendsTable = async () => {
           PRIMARY KEY (id)
       )
       `
-    )
+    );
     success('successfully created friends table');
   } catch (err) {
     error('error creating friends table ', err);
@@ -328,9 +308,7 @@ export const createFriendsTable = async () => {
 
 export const dropFriendsTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS friends`
-    )
+    await db.query(`DROP TABLE IF EXISTS friends`);
     success('successfully dropped Friends table');
   } catch (err) {
     error('error dropping Friends table');
@@ -363,7 +341,7 @@ export const createOrdersTable = async () => {
           PRIMARY KEY (id)
       )
       `
-    )
+    );
     success('successfully created Orders table');
   } catch (err) {
     error('error creating Orders table ', err);
@@ -372,9 +350,7 @@ export const createOrdersTable = async () => {
 
 export const dropOrdersTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS orders`
-    )
+    await db.query(`DROP TABLE IF EXISTS orders`);
     success('successfully dropped Orders table');
   } catch (err) {
     error('error dropping Orders table ', err);
@@ -400,7 +376,7 @@ export const createUsers_OrdersTable = async () => {
           PRIMARY KEY (id)
       )
       `
-    )
+    );
     success('successfully created Users_Orders table');
   } catch (err) {
     error('error creating Users_Orders table ', err);
@@ -409,9 +385,7 @@ export const createUsers_OrdersTable = async () => {
 
 export const dropUsers_OrdersTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS users_orders`
-    )
+    await db.query(`DROP TABLE IF EXISTS users_orders`);
     success('successfully dropped Users_Orders table');
   } catch (err) {
     error('error dropping Users_Orders table ', err);
@@ -442,7 +416,7 @@ export const createMessagesTable = async () => {
           PRIMARY KEY (id)
       )
       `
-    )
+    );
     success('successfully created Messages table');
   } catch (err) {
     error('error creating Messages table ', err);
@@ -451,9 +425,7 @@ export const createMessagesTable = async () => {
 
 export const dropMessagesTable = async () => {
   try {
-    await db.query(
-      `DROP TABLE IF EXISTS messages`
-    )
+    await db.query(`DROP TABLE IF EXISTS messages`);
     success('successfully dropped Messages table');
   } catch (err) {
     error('error dropping Messages table ', err);
@@ -496,11 +468,9 @@ export const dummyData = async () => {
       INSERT INTO reviews_users (id_users, id_reviews)
       VALUES (2, 2);
       `
-    )
+    );
     success('successfully created dummyData');
   } catch (err) {
     error('error creating DummyData table ', err);
   }
 };
-
-

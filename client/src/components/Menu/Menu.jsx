@@ -162,6 +162,7 @@ class Menu extends Component {
     if (currentItemQuantity === 0 && amount === -1) {
       return;
     }
+
     this.setState({
       currentItemQuantity: currentItemQuantity + amount,
     });
@@ -176,7 +177,7 @@ class Menu extends Component {
     } = this.state;
     const thing = [currentItemPrice, currentItemQuantity];
     try {
-      const item = await axios.post(`http://localhost:3000/api/cart/addItem`, {
+      await axios.post(`http://localhost:3000/api/cart/addItem`, {
         userId: userId,
         item: currentItem,
         quantity: JSON.stringify(thing),
@@ -195,15 +196,12 @@ class Menu extends Component {
   deleteItem = async food => {
     const { userId } = this.state;
     try {
-      const item = await axios.delete(
-        `http://localhost:3000/api/cart/deleteItem`,
-        {
-          data: {
-            userId: userId,
-            item: food,
-          },
-        }
-      );
+      await axios.delete(`http://localhost:3000/api/cart/deleteItem`, {
+        data: {
+          userId: userId,
+          item: food,
+        },
+      });
 
       await this.viewCart();
     } catch (error) {
@@ -289,7 +287,7 @@ class Menu extends Component {
         {
           params: {
             address: address,
-            key: GOOGLE,
+            key: process.env.GOOGLE,
           },
         }
       );
@@ -325,15 +323,12 @@ class Menu extends Component {
       if (data === 'CreateAccount') {
         const { currentBizId, checkoutCartData } = this.state;
         try {
-          const item = await axios.post(
-            `http://localhost:3000/api/cart/sendOrder`,
-            {
-              bizId: currentBizId,
-              order: JSON.stringify(checkoutCartData),
-              userId: JSON.parse(localStorage.storage).id,
-              poolId: createPool.data.poolId,
-            }
-          );
+          await axios.post(`http://localhost:3000/api/cart/sendOrder`, {
+            bizId: currentBizId,
+            order: JSON.stringify(checkoutCartData),
+            userId: JSON.parse(localStorage.storage).id,
+            poolId: createPool.data.poolId,
+          });
         } catch (error) {
           console.error('Error from Menu, checkout function -', error);
         }
@@ -343,15 +338,12 @@ class Menu extends Component {
         history.push('/payment');
       } else {
         try {
-          const item = await axios.post(
-            `http://localhost:3000/api/cart/sendOrder`,
-            {
-              bizId: currentBizId,
-              order: JSON.stringify(checkoutCartData),
-              userId: JSON.parse(localStorage.storage).id,
-              poolId: createPool.data.poolId,
-            }
-          );
+          await axios.post(`http://localhost:3000/api/cart/sendOrder`, {
+            bizId: currentBizId,
+            order: JSON.stringify(checkoutCartData),
+            userId: JSON.parse(localStorage.storage).id,
+            poolId: createPool.data.poolId,
+          });
         } catch (error) {
           console.error('Error from Menu, checkout function -', error);
         }

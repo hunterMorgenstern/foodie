@@ -3,6 +3,8 @@ import parser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 
+import { join } from 'path';
+
 import router from '../../routes/index';
 
 const middleWare = [
@@ -24,10 +26,13 @@ class App {
 
   mountMiddleWare() {
     this.express.use(...middleWare);
+    this.express.use(
+      express.static(join(__dirname, '../../../../../client/public'))
+    );
   }
 
   mountRoutes() {
-    this.express.use('/api', router);
+    this.express.use('/', router);
   }
 }
 

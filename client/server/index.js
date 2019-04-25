@@ -1,18 +1,16 @@
-import express from 'express';
-import { join, resolve } from 'path';
+// import express from 'express';
+// import { join, resolve } from 'path';
+// require('dotenv').config();
+// const STATIC_SERVER = process.env.STATIC_SERVER;
 
-require('dotenv').config();
+// const server = express();
 
-const STATIC_SERVER = process.env.STATIC_SERVER;
+// server.use(express.static(join(__dirname, '../public')));
 
-const server = express();
+// server.get('*', (req, res) =>
+//   res.sendFile(resolve(__dirname, '../public/index.html'))
+// );
 
-server.use(express.static(join(__dirname, '../public')));
-
-server.get('*', (req, res) =>
-  res.sendFile(resolve(__dirname, '../public/index.html'))
-);
-
-server.listen(STATIC_SERVER, () =>
-  console.log('serving static files on port ', STATIC_SERVER)
-);
+// server.listen(STATIC_SERVER, () =>
+//   console.log('serving static files on port ', STATIC_SERVER)
+// );
